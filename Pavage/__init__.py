@@ -7,21 +7,20 @@ bl_info = {
     "category": "Geometry",
 }
 
+
 import bpy
 import os
 
 # Name of the .blend file in the add-on's assets folder
 ASSETS_BLEND = os.path.join(os.path.dirname(__file__), "assets", "pavage.blend")
 
-print(ASSETS_BLEND)
-
 def load_all_node_groups_from_blend():
     """Loads all node groups contained in the .blend file."""
     if not os.path.exists(ASSETS_BLEND):
         print(f"[GeoNodes Loader] File not found : {ASSETS_BLEND}")
         return
-    
-    with bpy.data.libraries.load(ASSETS_BLEND, link=False) as (data_from, data_to): # type: ignore
+
+    with bpy.data.libraries.load(ASSETS_BLEND, link=True) as (data_from, data_to):
         if not data_from.node_groups:
             print("[GeoNodes Loader] No node group found in the .blend file..")
             return
@@ -34,6 +33,3 @@ def register():
 
 def unregister():
     pass
-
-if __name__ == "__main__":
-    register()

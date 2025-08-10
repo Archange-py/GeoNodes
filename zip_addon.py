@@ -17,11 +17,11 @@ def get_addon_version():
 
     return ".".join(match.groups()) if match else "0.0.0"
 
-OUTPUT_ZIP = f"addon/{ADDON_FOLDER}-{get_addon_version()}.zip"
+OUTPUT_ZIP = f"addons/{ADDON_FOLDER}-{get_addon_version()}.zip"
 
 def zip_addon():
     if not os.path.isdir(ADDON_FOLDER):
-        raise FileNotFoundError(f"Folder ‘{ADDON_FOLDER}’ not found.")
+        raise FileNotFoundError(f"Folder '{ADDON_FOLDER}' not found.")
 
     with zipfile.ZipFile(OUTPUT_ZIP, 'w', zipfile.ZIP_DEFLATED) as zipf:
         for root, _, files in os.walk(ADDON_FOLDER):
